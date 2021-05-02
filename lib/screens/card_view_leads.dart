@@ -19,7 +19,7 @@ class LeadsScreen extends StatefulWidget {
 
 class _LeadsScreenState extends State<LeadsScreen> {
   void _launchCaller(String number) async {
-    var url = "tel:+${number.toString()}";
+    var url = "tel:${number.toString()}";
     await launch(url);
   }
 
