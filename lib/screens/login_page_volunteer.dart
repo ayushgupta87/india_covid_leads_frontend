@@ -96,37 +96,37 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.02,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                TextButton(
-                    onPressed: buttonClicked == false
-                        ? () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return ForgetUsername();
-                            }));
-                          }
-                        : null,
-                    child: Text(
-                      'Forget Username ?',
-                      style: TextStyle(color: Colors.purple),
-                    )),
-                TextButton(
-                    onPressed: buttonClicked == false
-                        ? () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return ForgetPassword();
-                            }));
-                          }
-                        : null,
-                    child: Text(
-                      'Forget Password ?',
-                      style: TextStyle(color: Colors.purple),
-                    )),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //   children: [
+            //     TextButton(
+            //         onPressed: buttonClicked == false
+            //             ? () {
+            //                 Navigator.push(context,
+            //                     MaterialPageRoute(builder: (context) {
+            //                   return ForgetUsername();
+            //                 }));
+            //               }
+            //             : null,
+            //         child: Text(
+            //           'Forget Username ?',
+            //           style: TextStyle(color: Colors.purple),
+            //         )),
+            //     TextButton(
+            //         onPressed: buttonClicked == false
+            //             ? () {
+            //                 Navigator.push(context,
+            //                     MaterialPageRoute(builder: (context) {
+            //                   return ForgetPassword();
+            //                 }));
+            //               }
+            //             : null,
+            //         child: Text(
+            //           'Forget Password ?',
+            //           style: TextStyle(color: Colors.purple),
+            //         )),
+            //   ],
+            // ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.02,
             ),
@@ -277,7 +277,7 @@ class _LoginPageState extends State<LoginPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Want to join us ? '),
+                Text('Want to join us as a Volunteer ? '),
                 TextButton(
                   onPressed: buttonClicked == false
                       ? () {

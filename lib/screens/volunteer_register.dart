@@ -132,7 +132,7 @@ class _SingUpPageState extends State<SingUpPage> {
                       child: FlutterSwitch(
                         activeText: "Private",
                         inactiveText: "Public",
-                        width: MediaQuery.of(context).size.width * 0.22,
+                        width: MediaQuery.of(context).size.width * 0.25,
                         height: MediaQuery.of(context).size.width * 0.08,
                         valueFontSize: MediaQuery.of(context).size.width * 0.035,
                         toggleSize: 20.0,
@@ -205,7 +205,6 @@ class _SingUpPageState extends State<SingUpPage> {
                       setState(() {
                         _saving = false;
                       });
-                      Navigator.pop(context);
                       Fluttertoast.showToast(
                           msg: content.toString(),
                           toastLength: Toast.LENGTH_SHORT,

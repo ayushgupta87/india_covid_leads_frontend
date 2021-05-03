@@ -226,7 +226,7 @@ class _ServiceProviderDetailsState extends State<ServiceProviderDetails> {
                   ),
                   child: Column(
                     children: [
-                      TextButton(
+                      ElevatedButton(
                           onPressed: () {
                             var inputFormatYear = DateFormat('yyyy');
                             var todaysYear =
@@ -264,7 +264,7 @@ class _ServiceProviderDetailsState extends State<ServiceProviderDetails> {
                           },
                           child: Text(
                             'Select last confirmed date',
-                            style: TextStyle(color: Colors.blue),
+                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                           )),
                       Padding(
                         padding:
@@ -298,7 +298,7 @@ class _ServiceProviderDetailsState extends State<ServiceProviderDetails> {
                   ),
                   child: Column(
                     children: [
-                      TextButton(
+                      ElevatedButton(
                           onPressed: () {
                             var inputFormatYear = DateFormat('HH');
                             var todaysYear =
@@ -327,7 +327,7 @@ class _ServiceProviderDetailsState extends State<ServiceProviderDetails> {
                           },
                           child: Text(
                             'Select last confirmed time',
-                            style: TextStyle(color: Colors.blue),
+                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                           )),
                       Padding(
                         padding:

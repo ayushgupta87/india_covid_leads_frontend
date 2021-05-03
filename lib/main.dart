@@ -224,6 +224,19 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.09,
+        child: ElevatedButton(
+          child: Text('Disclaimer, App Sponsors', style: TextStyle(
+            letterSpacing: 3,
+          ),),
+          onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context){
+              return AppDetails();
+            }));
+          },
+        ),
+      ),
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.grey[200],
@@ -270,21 +283,13 @@ class _HomePageState extends State<HomePage> {
                 }
               }),
               SizedBox(
-                height: MediaQuery.of(context).size.width * 0.075,
-              ),
-              ElevatedButton(
-                child: Text('Disclaimer'),
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context){
-                    return AppDetails();
-                  }));
-                },
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.width * 0.075,
+                height: MediaQuery.of(context).size.width * 0.15,
               ),
               Divider(
                 thickness: 3,
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.width * 0.05,
               ),
               Text(
                 'Join Us as a Volunteer or Login',

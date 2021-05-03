@@ -14,18 +14,18 @@ class AppDetails extends StatefulWidget {
 }
 
 class _AppDetailsState extends State<AppDetails> {
-
-
   void _launchEmail(String emailId) async {
-    var urlEmail = "mailto:$emailId?subject=Message is regarding CoviRescue App";
+    var urlEmail =
+        "mailto:$emailId?subject=Message is regarding CoviRescue App";
     await launch(urlEmail);
   }
 
-  List<Sponsor> listItems;
+  List<Sponsor> listItems = [];
   bool _saving = true;
-  Future<List<Sponsor>> getAllItems() async {
 
+  Future<List<Sponsor>> getAllItems() async {
     var allSponsor = await http.get(allSonsorsURI);
+
     if (allSponsor.statusCode != 200) {
       var content = await jsonDecode(allSponsor.body)['message'];
       Fluttertoast.showToast(
@@ -45,14 +45,11 @@ class _AppDetailsState extends State<AppDetails> {
       }
 
       for (var item in jsonData) {
-        Sponsor sponsor = Sponsor(
-            item['name'], item['image']
-        );
+        Sponsor sponsor = Sponsor(item['name'], item['image']);
         listItems.add(sponsor);
       }
       return listItems;
     }
-
   }
 
   @override
@@ -60,7 +57,7 @@ class _AppDetailsState extends State<AppDetails> {
     super.initState();
     getAllItems().whenComplete(() {
       setState(() {
-        _saving=false;
+        _saving = false;
       });
     }).catchError((SocketException) {
       setState(() {
@@ -88,9 +85,6 @@ class _AppDetailsState extends State<AppDetails> {
           fontSize: 16.0);
     });
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -120,55 +114,81 @@ class _AppDetailsState extends State<AppDetails> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'The user understands that the data provided on this app platform is collected and verified by volunteers to the best of their ability. However we sincerely request the users to verify and confirm the identity of any service provider. Any financial, purchase or commercial deal must be done by the user os his/her ability to judge the information, Kaizen is not liable or responsible for any loss or damage of any kind (direct/indirect/consequential or otherwise). Don\'t misuse this platform by providing false information, if we found anything not related to CoviRescue we will remove that information. User must understand that the real-time verification of the data is neither a responsibility, nor a legality of the Kaizen Innovations in any manner whatsoever.',
+                'The user understands that the data provided on this app platform is collected and verified by volunteers to the best of their ability. However we sincerely request the users to verify and confirm the identity of any service provider. Any financial, purchase or commercial deal must be done by the user is his/her ability to judge the information, Kaizen is not liable or responsible for any loss or damage of any kind (direct/indirect/consequential or otherwise). Don\'t misuse this platform by providing false information, if we fiund anything not related to CoviRescue we will remove that information. User must understand that the real-time verification of the data is neither a responsibility, nor a legality of the Kaizen Innovations in any manner whatsoever.',
                 style: TextStyle(
-                    fontSize: MediaQuery.of(context).size.width * 0.045),
+                    fontSize: MediaQuery.of(context).size.width * 0.035),
               ),
             ),
-            SizedBox(height: 20,),
-            Text('Tell us if this platform helped you, or any feature we should add ! We will love to hear from you :)', textAlign: TextAlign.center,),
-            ElevatedButton(onPressed: (){
-              _launchEmail('kaizenandinnovations@gmail.com');
-            }, child: Text('Email Us')),
-            SizedBox(height: 20,),
-            Text('List of CoviRescue App Sponsors', style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.05),),
-            Text('(We thanks our sponsors.. this amount will be used in maintaining the servers and else will be donated to the needy people, we won\'t personally keep any profit amount)', style: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.03),
-            textAlign: TextAlign.center,),
-            SizedBox(height: 10,),
-            Expanded(child: ListView.builder(
-                itemCount: 200,
-                itemBuilder: (context, i){
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              'Tell us if this platform helped you, or any feature we should add ! We will love to hear from you :)',
+              textAlign: TextAlign.center,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  _launchEmail('kaizenandinnovations@gmail.com');
+                },
+                child: Text('Email Us')),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              'List of CoviRescue App Sponsors',
+              style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.width * 0.05),
+            ),
+            Text(
+              '(We thanks our sponsors.. this amount will be used in maintaining app the servers)',
+              style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.width * 0.03),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: listItems.length,
+                itemBuilder: (context, i) {
                   Uint8List _base64_image = base64.decode(listItems[i].image);
-              return Card(
-                child: Column(
-                  children: [
-                    Row(
+                  return Card(
+                    child: Column(
                       children: [
-                        Expanded(
-                            child: Text(
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
                               listItems[i].name,
                               style: TextStyle(
                                 color: Colors.grey[600],
                                 fontSize:
-                                MediaQuery.of(context).size.width * 0.04,
+                                    MediaQuery.of(context).size.width * 0.04,
                                 fontWeight: FontWeight.bold,
                               ),
-                            )),
-                        Expanded(
-                            child: Image.memory(_base64_image) is FormatException ||
-                                listItems[i].image == 'NONE'
-                                ? Expanded(
-                                child: Image.asset('images/kazien.png'))
-                                : Expanded(
-                              child: Image.memory(_base64_image),
-                            ),),
+                            ),
+                            Image.memory(_base64_image) is FormatException ||
+                                    listItems[i].image == 'NONE' ||
+                                    listItems[i].image == ''
+                                ? Image.asset(
+                                    'images/kaizen.png',
+                                    width: MediaQuery.of(context).size.width *
+                                        0.4,
+                                  )
+                                : Image.memory(
+                                    _base64_image,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.4,
+                                  ),
+                          ],
+                        ),
                       ],
                     ),
-                  ],
-                ),
-              );
-            },),),
-
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
@@ -181,8 +201,7 @@ class Sponsor {
   final String image;
 
   Sponsor(
-      this.name,
-      this.image,
-      );
+    this.name,
+    this.image,
+  );
 }
-
