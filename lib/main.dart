@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:india_covid_leads/models/validate.dart';
 import 'package:india_covid_leads/reusable_widget/reuseablewidget.dart';
 import 'package:india_covid_leads/screens/card_view_leads.dart';
+import 'package:india_covid_leads/screens/disclaimer.dart';
 import 'package:india_covid_leads/screens/enter_service_provider_details.dart';
 import 'package:india_covid_leads/screens/login_page_volunteer.dart';
 import 'package:india_covid_leads/screens/side_bar.dart';
@@ -16,7 +17,6 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-
 void main() {
   runApp(MaterialApp(
     home: SplashScreen(),
@@ -24,24 +24,22 @@ void main() {
   ));
 }
 
-
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   @override
   void initState() {
     super.initState();
 
-    Timer(Duration(seconds: 5), (){
-      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context){
+    Timer(Duration(seconds: 5), () {
+      Navigator.pushAndRemoveUntil(context,
+          MaterialPageRoute(builder: (context) {
         return HomePage();
       }), (route) => false);
     });
-
   }
 
   @override
@@ -76,79 +74,79 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
           Expanded(
               child: Container(
-                margin: EdgeInsets.only(left: 20),
-                alignment: Alignment.topLeft,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      ' ',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: MediaQuery.of(context).size.width * 0.11),
-                    ),
-                    Text('CoviRescue',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: MediaQuery.of(context).size.width * 0.11)),
-                    Text(' ',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: MediaQuery.of(context).size.width * 0.11)),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.04,
-                    ),
-                    Text(
-                      'Leads for resources needed\nto fight Covid19',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: MediaQuery.of(context).size.width * 0.04,
-                          fontWeight: FontWeight.bold,
-                          wordSpacing: 1,
-                          letterSpacing: 4),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.width * 0.05,
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.2,
-                      child: SpinKitThreeBounce(
-                          size: MediaQuery.of(context).size.width * 0.08,
-                          itemBuilder: (BuildContext context, int index) {
-                            return DecoratedBox(
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: index.isEven ? Colors.white60 : Colors.green,
-                              ),
-                            );
-                          }),
-                    ),
-                  ],
+            margin: EdgeInsets.only(left: 20),
+            alignment: Alignment.topLeft,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  ' ',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: MediaQuery.of(context).size.width * 0.11),
                 ),
-              )),
+                Text('CoviRescue',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: MediaQuery.of(context).size.width * 0.11)),
+                Text(' ',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: MediaQuery.of(context).size.width * 0.11)),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.04,
+                ),
+                Text(
+                  'Leads for resources needed\nto fight Covid19',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: MediaQuery.of(context).size.width * 0.04,
+                      fontWeight: FontWeight.bold,
+                      wordSpacing: 1,
+                      letterSpacing: 4),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.05,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.2,
+                  child: SpinKitThreeBounce(
+                      size: MediaQuery.of(context).size.width * 0.08,
+                      itemBuilder: (BuildContext context, int index) {
+                        return DecoratedBox(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: index.isEven ? Colors.white60 : Colors.green,
+                          ),
+                        );
+                      }),
+                ),
+              ],
+            ),
+          )),
           Expanded(
               child: Align(
-                alignment: Alignment.bottomLeft,
-                child: Stack(
-                  children: [
-                    Positioned.fill(
-                      left: -150,
-                      bottom: -100,
-                      child: Container(
-                        alignment: Alignment.bottomLeft,
-                        child: Image.asset(
-                          'images/covid.png',
-                          height: MediaQuery.of(context).size.width,
-                        ),
-                      ),
+            alignment: Alignment.bottomLeft,
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  left: -150,
+                  bottom: -100,
+                  child: Container(
+                    alignment: Alignment.bottomLeft,
+                    child: Image.asset(
+                      'images/covid.png',
+                      height: MediaQuery.of(context).size.width,
                     ),
-                  ],
+                  ),
                 ),
-              )),
+              ],
+            ),
+          )),
         ],
       ),
     );
@@ -272,7 +270,18 @@ class _HomePageState extends State<HomePage> {
                 }
               }),
               SizedBox(
-                height: MediaQuery.of(context).size.width * 0.15,
+                height: MediaQuery.of(context).size.width * 0.075,
+              ),
+              ElevatedButton(
+                child: Text('Disclaimer'),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context){
+                    return AppDetails();
+                  }));
+                },
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.width * 0.075,
               ),
               Divider(
                 thickness: 3,
@@ -287,26 +296,22 @@ class _HomePageState extends State<HomePage> {
                 height: MediaQuery.of(context).size.width * 0.15,
               ),
               kbuildButton(context, 'Volunteer Login', () async {
-
                 setState(() {
-                  _saving=true;
+                  _saving = true;
                 });
 
                 String access_token_is = await Validate();
 
-                if (access_token_is != null){
-                  var user = await http.get(currentCustomerURI,
-                      headers: {
-                        HttpHeaders.authorizationHeader:
-                        'Bearer $access_token_is'
-                      }).timeout(Duration(seconds: 10));
+                if (access_token_is != null) {
+                  var user = await http.get(currentCustomerURI, headers: {
+                    HttpHeaders.authorizationHeader: 'Bearer $access_token_is'
+                  }).timeout(Duration(seconds: 10));
 
-                  var userIs =
-                      await jsonDecode(user.body)['userName'];
+                  var userIs = await jsonDecode(user.body)['userName'];
 
                   if (user.statusCode == 200) {
                     setState(() {
-                      _saving=false;
+                      _saving = false;
                     });
                     Fluttertoast.showToast(
                         msg: "Welcome back ! $userIs",
@@ -316,12 +321,13 @@ class _HomePageState extends State<HomePage> {
                         backgroundColor: Colors.black,
                         textColor: Colors.white,
                         fontSize: 16.0);
-                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context){
+                    Navigator.pushAndRemoveUntil(context,
+                        MaterialPageRoute(builder: (context) {
                       return ServiceProviderDetails(userIs);
                     }), (route) => false);
                   } else {
                     setState(() {
-                      _saving=false;
+                      _saving = false;
                     });
                     Fluttertoast.showToast(
                         msg: "Login Required",
@@ -334,7 +340,7 @@ class _HomePageState extends State<HomePage> {
                   }
                 } else {
                   setState(() {
-                    _saving=false;
+                    _saving = false;
                   });
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return LoginPage();
@@ -345,11 +351,13 @@ class _HomePageState extends State<HomePage> {
                 height: MediaQuery.of(context).size.width * 0.15,
               ),
               kbuildButton(context, 'Volunteer Register', () {
-                Navigator.push(context, MaterialPageRoute(builder: (context){
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return SingUpPage();
                 }));
               }),
-              SizedBox(height: 100,),
+              SizedBox(
+                height: 100,
+              ),
             ],
           ),
         ),
