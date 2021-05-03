@@ -8,7 +8,7 @@ class URLNetwork {
 //   return url;
 // }
 urlNetwork() {
-  var url = 'india-covid-leads-backend-4nznf.ondigitalocean.app';
+  var url = 'india-covid-leads-backend-us5vm.ondigitalocean.app';
   return url;
 }
 }
