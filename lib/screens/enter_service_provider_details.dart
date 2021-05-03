@@ -14,7 +14,6 @@ import 'package:intl/intl.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 
 
 class ServiceProviderDetails extends StatefulWidget {
@@ -191,7 +190,7 @@ class _ServiceProviderDetailsState extends State<ServiceProviderDetails> {
               ),
               Center(
                 child: Text(
-                  'Please don\'t misuse this platform as these information will help many patients to recover',
+                  'Don\'t misuse this platform as this information can help many patients to recover',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: MediaQuery.of(context).size.width * 0.04),
