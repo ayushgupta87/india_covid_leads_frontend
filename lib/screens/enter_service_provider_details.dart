@@ -206,14 +206,14 @@ class _ServiceProviderDetailsState extends State<ServiceProviderDetails> {
                   category, 'Select Service', service, Icon(Icons.category)),
               KbuildTextBox(
                   provider_contact,
-                  'Enter service provider contact number',
+                  '* Enter service provider contact number',
                   Icon(Icons.phone),
                   1,
                   TextInputType.number,
                   false),
-              KbuildTextBox(provider_name, 'Enter service provider name',
+              KbuildTextBox(provider_name, '* Enter service provider name',
                   Icon(Icons.person), 1, TextInputType.name, false),
-              KbuildTextBox(qty, 'Enter count if any',
+              KbuildTextBox(qty, 'Enter count (if any)',
                   Icon(Icons.question_answer), 1, TextInputType.number, false),
               Padding(
                 padding:
@@ -263,7 +263,7 @@ class _ServiceProviderDetailsState extends State<ServiceProviderDetails> {
                                 locale: LocaleType.en);
                           },
                           child: Text(
-                            'Select last confirmed date',
+                            '* Select last confirmed date',
                             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                           )),
                       Padding(
@@ -326,7 +326,7 @@ class _ServiceProviderDetailsState extends State<ServiceProviderDetails> {
                                 }, currentTime: DateTime.now());
                           },
                           child: Text(
-                            'Select last confirmed time',
+                            '* Select last confirmed time',
                             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                           )),
                       Padding(
@@ -351,7 +351,7 @@ class _ServiceProviderDetailsState extends State<ServiceProviderDetails> {
                 ),
               ),
 
-              KbuildTextBox(url, 'Enter any imp URL',
+              KbuildTextBox(url, 'Enter any imp URL (if any)',
                   Icon(Icons.web), 1, TextInputType.url, false),
               SizedBox(height: 50,),
               kbuildButton(context, 'Share', ()async{

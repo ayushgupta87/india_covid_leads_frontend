@@ -292,7 +292,8 @@ class _HomePageState extends State<HomePage> {
                 height: MediaQuery.of(context).size.width * 0.05,
               ),
               Text(
-                'Join Us as a Volunteer or Login',
+                'Join Us as a Volunteer or Login to post leads',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: MediaQuery.of(context).size.width * 0.05,
                     fontWeight: FontWeight.bold),

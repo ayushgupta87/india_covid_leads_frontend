@@ -26,7 +26,7 @@ Widget KbuildDropDown(TextEditingController dropdownController,
     padding: const EdgeInsets.only(right: 20, left: 20, top: 20),
     child: DropDownField(
       controller: dropdownController,
-      hintText: labelText,
+      hintText: '* $labelText',
       enabled: true,
       items: list,
       icon: icon,
