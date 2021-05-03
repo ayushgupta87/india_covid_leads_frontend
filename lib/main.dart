@@ -83,18 +83,18 @@ class _SplashScreenState extends State<SplashScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      'India',
+                      ' ',
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: MediaQuery.of(context).size.width * 0.11),
                     ),
-                    Text('COVID',
+                    Text('CoviRescue',
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: MediaQuery.of(context).size.width * 0.11)),
-                    Text('Leads',
+                    Text(' ',
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -103,7 +103,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       height: MediaQuery.of(context).size.width * 0.04,
                     ),
                     Text(
-                      'Search Covid related leads\nnear you easily',
+                      'Leads for resources needed\nto fight Covid19',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: MediaQuery.of(context).size.width * 0.04,

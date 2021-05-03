@@ -25,6 +25,7 @@ dev_dependencies:
   toggle_switch: ^0.1.9
   flutter_datetime_picker: ^1.5.1
   intl: ^0.17.0
+  flutter_switch: ^0.3.1
 
 
 flutter:

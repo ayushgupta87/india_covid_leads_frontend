@@ -30,3 +30,15 @@ var volunteerRegistrationURI = Uri.https(uri, '/kaizen/api/covidLeads/registerVo
 var customerRefreshTokenURI = Uri.https(uri, '/kaizen/api/covidLeads/refreshTokenVolunteer');
 
 var newLeadURI = Uri.https(uri, '/kaizen/api/covidLeads/addNewLead');
+
+volunteerDetailsURI(String user) {
+  var volunteerDetailsURI = Uri.https(
+      uri, '/kaizen/api/covidLeads/volunteerDetails/$user');
+  return volunteerDetailsURI;
+}
+
+volunteerProfileStatusURI(String status) {
+  var volunteerProfileStatusURI = Uri.https(
+      uri, '/kaizen/api/covidLeads/volunteerProfileStatus/$status');
+  return volunteerProfileStatusURI;
+}

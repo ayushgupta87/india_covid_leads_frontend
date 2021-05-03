@@ -2,7 +2,7 @@
     package="com.kaizeninnovations.india_covid_leads">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="India COVID Leads"
+        android:label="CoviRescue"
         android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -14,6 +14,8 @@ import 'package:intl/intl.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_switch/flutter_switch.dart';
+
 
 class ServiceProviderDetails extends StatefulWidget {
   String user;
@@ -23,6 +25,9 @@ class ServiceProviderDetails extends StatefulWidget {
 }
 
 class _ServiceProviderDetailsState extends State<ServiceProviderDetails> {
+
+  bool status = true;
+  var index;
   bool _saving = true;
 
 
@@ -112,7 +117,7 @@ class _ServiceProviderDetailsState extends State<ServiceProviderDetails> {
                 child: Icon(FontAwesomeIcons.signOutAlt),
                 onTap: () async{
                   SharedPreferences sharedpreference =
-                      await SharedPreferences.getInstance();
+                  await SharedPreferences.getInstance();
                   await sharedpreference.remove('access_token');
                   await sharedpreference.remove('refresh_token');
                   Navigator.pushAndRemoveUntil(context,
@@ -123,6 +128,7 @@ class _ServiceProviderDetailsState extends State<ServiceProviderDetails> {
                 }),
           ),
         ],
+
       ),
       body: ModalProgressHUD(
         inAsyncCall: _saving,

@@ -6,8 +6,10 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:india_covid_leads/models/network_info.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:india_covid_leads/reusable_widget/reuseablewidget.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:intl/intl.dart';
 
 class LeadsScreen extends StatefulWidget {
   final String city;
@@ -18,6 +20,7 @@ class LeadsScreen extends StatefulWidget {
 }
 
 class _LeadsScreenState extends State<LeadsScreen> {
+
   void _launchCaller(String number) async {
     var url = "tel:${number.toString()}";
     await launch(url);
@@ -25,6 +28,11 @@ class _LeadsScreenState extends State<LeadsScreen> {
 
   void _launchUrl(String Url) async {
     launch(Url);
+  }
+
+  void _launchEmail(String emailId, String details) async {
+    var urlEmail = "mailto:$emailId?subject=Kaizen CoviRescue, A user said you Thank-you for /$details/ lead";
+    await launch(urlEmail);
   }
 
   bool _button = true;
@@ -185,7 +193,10 @@ class _LeadsScreenState extends State<LeadsScreen> {
                 itemCount: listItems.length + 1,
                 itemBuilder: (context, i) {
                   if (i == listItems.length) {
-                    return Padding(
+
+
+
+                  return Padding(
                       padding: const EdgeInsets.only(
                           top: 20.0, left: 50, right: 50, bottom: 60),
                       child: SizedBox(
@@ -280,54 +291,80 @@ class _LeadsScreenState extends State<LeadsScreen> {
                             children: [
                               Expanded(
                                   child: Text(
-                                'Last verified date',
-                                style: TextStyle(
-                                  color: Colors.grey[600],
-                                  fontSize:
+                                    'Last verified',
+                                    style: TextStyle(
+                                      color: Colors.grey[600],
+                                      fontSize:
                                       MediaQuery.of(context).size.width * 0.04,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              )),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )),
                               Expanded(
                                   child: Text(
-                                listItems[i].lastVerifiedDate,
-                                style: TextStyle(
-                                  fontSize:
+                                    TimeAgo.timeAgoSinceDate('${listItems[i].lastVerifiedDate} ${listItems[i].lastVerifiedTime}').toString(),
+                                    style: TextStyle(
+                                      fontSize:
                                       MediaQuery.of(context).size.width * 0.04,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              )),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )),
                             ],
                           ),
                           SizedBox(
                             height: 5,
                           ),
-                          Row(
-                            children: [
-                              Expanded(
-                                  child: Text(
-                                'Last verified time',
-                                style: TextStyle(
-                                  color: Colors.grey[600],
-                                  fontSize:
-                                      MediaQuery.of(context).size.width * 0.04,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              )),
-                              Expanded(
-                                  child: Text(
-                                listItems[i].lastVerifiedTime,
-                                style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.width * 0.04,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              )),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
+                          // Row(
+                          //   children: [
+                          //     Expanded(
+                          //         child: Text(
+                          //       'Last verified date',
+                          //       style: TextStyle(
+                          //         color: Colors.grey[600],
+                          //         fontSize:
+                          //             MediaQuery.of(context).size.width * 0.04,
+                          //         fontWeight: FontWeight.bold,
+                          //       ),
+                          //     )),
+                          //     Expanded(
+                          //         child: Text(
+                          //       listItems[i].lastVerifiedDate,
+                          //       style: TextStyle(
+                          //         fontSize:
+                          //             MediaQuery.of(context).size.width * 0.04,
+                          //         fontWeight: FontWeight.bold,
+                          //       ),
+                          //     )),
+                          //   ],
+                          // ),
+                          // SizedBox(
+                          //   height: 5,
+                          // ),
+                          // Row(
+                          //   children: [
+                          //     Expanded(
+                          //         child: Text(
+                          //       'Last verified time',
+                          //       style: TextStyle(
+                          //         color: Colors.grey[600],
+                          //         fontSize:
+                          //             MediaQuery.of(context).size.width * 0.04,
+                          //         fontWeight: FontWeight.bold,
+                          //       ),
+                          //     )),
+                          //     Expanded(
+                          //         child: Text(
+                          //       listItems[i].lastVerifiedTime,
+                          //       style: TextStyle(
+                          //         fontSize:
+                          //             MediaQuery.of(context).size.width * 0.04,
+                          //         fontWeight: FontWeight.bold,
+                          //       ),
+                          //     )),
+                          //   ],
+                          // ),
+                          // SizedBox(
+                          //   height: 5,
+                          // ),
                           Row(
                             children: [
                               Expanded(
@@ -401,12 +438,68 @@ class _LeadsScreenState extends State<LeadsScreen> {
                                 ),
                               )),
                               Expanded(
-                                  child: Text(
-                                listItems[i].verificationBy,
-                                style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.width * 0.04,
-                                  fontWeight: FontWeight.bold,
+                                  child: GestureDetector(
+                                onTap: () async {
+                                  setState(() {
+                                    _saving = true;
+                                  });
+
+                                  var userDetails = await http.get(
+                                      volunteerDetailsURI(
+                                          listItems[i].verificationBy));
+
+                                  if (userDetails.statusCode == 200) {
+                                    var userIs = await jsonDecode(
+                                        userDetails.body)['name'];
+                                    var userontactInfo = await jsonDecode(
+                                        userDetails.body)['contactinfo'];
+                                    showAlertDialoge(BuildContext context) {
+                                      Widget okButton = FlatButton(
+                                        child: Text('Ok'),
+                                        onPressed: () {
+                                          setState(() {
+                                            _saving = false;
+                                          });
+                                          Navigator.pop(context);
+                                        },
+                                      );
+                                      AlertDialog alert = AlertDialog(
+                                        title: Text('Details'),
+                                        content: SingleChildScrollView(
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                    'Volunteer name - $userIs\nEmail address - ${userontactInfo != 'Private' ? userontactInfo : 'Details hidden'}'),
+                                                SizedBox(height: 10,),
+                                                ElevatedButton(onPressed: userontactInfo != 'Private' ? (){
+                                                   _launchEmail(userontactInfo, listItems[i].providerName);
+                                                } : null, child: Text('Say Thank-you')),
+                                              ],
+                                            )),
+                                        actions: [
+                                          okButton,
+                                        ],
+                                      );
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return alert;
+                                        },
+                                      );
+                                    }
+
+                                    showAlertDialoge(context);
+                                  }
+                                },
+                                child: Text(
+                                  listItems[i].verificationBy,
+                                  style: TextStyle(
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.04,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.purple,
+                                  ),
                                 ),
                               )),
                             ],
@@ -448,4 +541,36 @@ class AllLeads {
       this.serviceCategory,
       this.importantLink,
       this.verificationBy);
+}
+
+class TimeAgo {
+  static String timeAgoSinceDate(String dateString,
+      {bool numericDates = true}) {
+    DateTime notificationDate = DateFormat("yyyy-MM-dd HH-mm").parse(
+        dateString);
+    final date2 = DateTime.now();
+    final difference = date2.difference(notificationDate);
+
+    if (difference.inDays > 8) {
+      return dateString;
+    } else if ((difference.inDays / 7).floor() >= 1) {
+      return (numericDates) ? '1 week ago' : 'Last week';
+    } else if (difference.inDays >= 2) {
+      return '${difference.inDays} days ago';
+    } else if (difference.inDays >= 1) {
+      return (numericDates) ? '1 day ago' : 'Yesterday';
+    } else if (difference.inHours >= 2) {
+      return '${difference.inHours} hours ago';
+    } else if (difference.inHours >= 1) {
+      return (numericDates) ? '1 hour ago' : 'An hour ago';
+    } else if (difference.inMinutes >= 2) {
+      return '${difference.inMinutes} minutes ago';
+    } else if (difference.inMinutes >= 1) {
+      return (numericDates) ? '1 minute ago' : 'A minute ago';
+    } else if (difference.inSeconds >= 3) {
+      return '${difference.inSeconds} seconds ago';
+    } else {
+      return 'Just now';
+    }
+  }
 }
