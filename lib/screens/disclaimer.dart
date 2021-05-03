@@ -140,7 +140,7 @@ class _AppDetailsState extends State<AppDetails> {
                   fontSize: MediaQuery.of(context).size.width * 0.05),
             ),
             Text(
-              '(We thanks our sponsors.. this amount will be used in maintaining app the servers)',
+              '(We thanks our sponsors.. this amount will be used in maintaining the App servers)',
               style: TextStyle(
                   fontSize: MediaQuery.of(context).size.width * 0.03),
               textAlign: TextAlign.center,
